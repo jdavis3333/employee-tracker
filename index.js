@@ -23,11 +23,12 @@ connection.connect(function(err) {
 function getUserInputs () {
     inquirer.prompt([
         {
-        type: "",
-        message: "",
-        name: "",
-        choices: ["",""]    
+        type:"list",
+        message: "What would you like to do",
+        name: "userOptions",
+        choices: ["View All Employees", "View All Employees By Department", "View All Employees by Manager","Add Employee","Remove Employee", "Update Employee Role", "Update Employee Manager"]    
         },
-    ])
-    .then
+    ]).then
+    
 }
+// getUserInputs();
