@@ -31,6 +31,7 @@ function getUserInputs () {
             "View All Employees", 
             "View All Employees By Department", 
             "View All Departments",
+            "View All Roles",
             "Add Department",
             "Add Role",
             "Add Employee",
@@ -53,6 +54,10 @@ function getUserInputs () {
             case "View All Departments":
                 viewAllDepts();
                 break;
+
+            case "View All Roles":
+                viewAllRoles();
+                break;    
 
             case "Add Department":
                 addDepartment();
@@ -102,6 +107,14 @@ function viewAllInDept() {
 
 function viewAllDepts() {
     connection.query("SELECT * FROM department", function(err, data){
+        if(err) throw err
+        console.table(data);
+        getUserInputs();
+    })
+}
+
+function viewAllRoles() {
+    connection.query("SELECT * FROM roles", function(err, data){
         if(err) throw err
         console.table(data);
         getUserInputs();
@@ -161,23 +174,25 @@ function addEmployee() {
         {
             type: "input",
             message: "What is the employee's last name?",
-            name: "firstName"
+            name: "lastName"
         },
         {
             type: "list",
-            message: "What is the employee's title?",
-            name: "title",
-            choices: ["Sales Lead", "Salesperson", "Lead Engineer", "Software Engineer", "Account Manager", "Accountant", "Legal Team Lead"] //loop?
+            message: "What is the employee's role ID?",
+            name: "employeeRoleIs",
+            choices: [1,2,3,4] 
         },
         {
             type: "list",
             message: "Who is the employee's manager?",
             name: "empManager",
-            choices: [] //loop?
+            choices: [4,5,6,7]
         }
     ]).then(function(answers){
-        connection.query("", {
-
+        connection.query('INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?,?,?,?);', [answers.firstName, answers.lastName, answers.employeeRoleId, answers.empManager], function(err, res) {
+            if(err) throw err
+            console.log("Employee inserted");
+            getUserInputs();
         })
     })
 }

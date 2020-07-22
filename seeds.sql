@@ -39,14 +39,17 @@ VALUES ("Sales");
 INSERT INTO department (dept_name)
 VALUES ("Engineering");
 
-INSERT INTO roles (title, salary)
+INSERT INTO roles (title, salary, department_id)
 VALUES ("Sales Rep", 60000);
 
-INSERT INTO roles (title, salary)
+INSERT INTO roles (title, salary, department_id)
 VALUES ("Engineer", 120000);
 
-INSERT INTO roles (title, salary)
+INSERT INTO roles (title, salary, department_id)
 VALUES ("Attorney", 120000);
+
+INSERT INTO roles (title, salary, department_id)
+VALUES ("Sales Rep", 60000);
 
 INSERT INTO employee (first_name, last_name, role_id)
 VALUES ("Jim", "Johnson", 1);
