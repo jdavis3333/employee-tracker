@@ -29,7 +29,6 @@ function getUserInputs () {
         name: "userOptions",
         choices: [
             "View All Employees", 
-            "View All Employees By Department", 
             "View All Departments",
             "View All Roles",
             "Add Department",
@@ -37,7 +36,6 @@ function getUserInputs () {
             "Add Employee",
             "Remove Employee", 
             "Update Employee Role", 
-            "Update Employee Manager"
         ]    
         },
     ])
@@ -45,10 +43,6 @@ function getUserInputs () {
         switch (answer.userOptions) {
             case "View All Employees":
                 viewAll();
-                break;
-
-            case "View All Employees By Department":
-                viewAllInDept();
                 break;
 
             case "View All Departments":
@@ -95,14 +89,6 @@ function viewAll() {
         getUserInputs();
     })
     
-}
-
-function viewAllInDept() {
-    connection.query("SELECT * FROM DEPARTMENT d, employee e, roles r where d.department_id=r.department_id and r.role_id=e.role_id;", function(err, data){
-        if(err) throw err
-        console.table(data);
-        getUserInputs();
-    })
 }
 
 function viewAllDepts() {
@@ -203,7 +189,7 @@ function updateEmployeeRole() {
             type: "list",
             message: "Which employee's role do you want to update?",
             name: "empSelectRoleUpdate",
-            list: [] //can this be populated with a loop?
+            list: [] 
         },
         {
             type: "list",

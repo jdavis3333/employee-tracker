@@ -4,66 +4,39 @@ CREATE DATABASE tracker_db;
 
 USE tracker_db;
 
-CREATE TABLE department(
-    department_id INTEGER(11) AUTO_INCREMENT NOT NULL,
+CREATE TABLE department (
+    id INTEGER(11) AUTO_INCREMENT NOT NULL,
     dept_name VARCHAR(30),
-    PRIMARY KEY (department_id)
+    PRIMARY KEY (id)
 );
 
-CREATE TABLE roles(
-    role_id INTEGER(11) AUTO_INCREMENT NOT NULL,
-    title VARCHAR(30) NULL,
-    salary DECIMAL(11,2) NULL,
+CREATE TABLE roles (
+    id INTEGER(11) AUTO_INCREMENT NOT NULL,
+    title VARCHAR(30),
+    salary DECIMAL(11,2),
     department_id INTEGER(11),
-    PRIMARY KEY (role_id),
-    FOREIGN KEY (department_id) REFERENCES department(department_id)
+    PRIMARY KEY (id),
 );
 
-CREATE TABLE employee(
-    employee_id INTEGER(11) AUTO_INCREMENT NOT NULL,
-    first_name VARCHAR(30) NULL,
-    last_name VARCHAR(30) NULL,
-    role_id INTEGER(11) NULL,
-    manager_id INTEGER NULL,
-    PRIMARY KEY (employee_id),
-    FOREIGN KEY (role_id) REFERENCES roles(role_id),
-    FOREIGN KEY (manager_id) REFERENCES employee(employee_id)
+CREATE TABLE employee (
+    id INTEGER(11) AUTO_INCREMENT NOT NULL,
+    first_name VARCHAR(30),
+    last_name VARCHAR(30),
+    role_id INTEGER(11),
+    manager_id INTEGER,
+    PRIMARY KEY (id),
 );
 
 INSERT INTO department (dept_name)
-VALUES ("Legal");
-
-INSERT INTO department (dept_name)
-VALUES ("Sales");
-
-INSERT INTO department (dept_name)
-VALUES ("Engineering");
+VALUES ("Legal"), ("Sales"), ("Engineering");
 
 INSERT INTO roles (title, salary, department_id)
-VALUES ("Sales Rep", 60000);
+VALUES ("Engineer", "120,000", "3"), ("Attorney", "120,000", "1"), ("Sales Rep", "60,000", "2");
 
-INSERT INTO roles (title, salary, department_id)
-VALUES ("Engineer", 120000);
+INSERT INTO employee (first_name, last_name, role_id, manager_id)
+VALUES ("Jim", "Johnson", "1", "200"), ("Joan", "Jameson", "2", "300"), ("Val", "Elliott", "3", "400");
 
-INSERT INTO roles (title, salary, department_id)
-VALUES ("Attorney", 120000);
 
-INSERT INTO roles (title, salary, department_id)
-VALUES ("Sales Rep", 60000);
-
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ("Jim", "Johnson", 1);
-
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ("Joan", "Jameson", 2);
-
-INSERT INTO employee (first_name, last_name, role_id)
-VALUES ("Val", "Elliott", 3);
-
-SELECT * FROM DEPARTMENT d, employee e, roles r where d.department_id=r.department_id and r.role_id=e.role_id;
 SELECT * FROM employee;
-
-update roles set department_id = 2 where role_id < 3;
-update roles set department_id = 1 where role_id = 3;
-SELECT * FROM DEPARTMENT d, employee e, roles r where d.department_id=r.department_id and r.role_id=e.role_id;
 SELECT * FROM department;
+SELECT * FROM roles;
