@@ -32,6 +32,7 @@ function getUserInputs () {
             "View All Employees By Department", 
             "View All Departments",
             "Add Department",
+            "Add Role",
             "Add Employee",
             "Remove Employee", 
             "Update Employee Role", 
@@ -46,7 +47,7 @@ function getUserInputs () {
                 break;
 
             case "View All Employees By Department":
-                viewAllDept();
+                viewAllInDept();
                 break;
 
             case "View All Departments":
@@ -57,9 +58,13 @@ function getUserInputs () {
                 addDepartment();
                 break;
 
+            case "Add Role":
+                addRole();
+                break;  
+
             case "Add Employee":
-                addEmployee();
-                break;    
+            addEmployee();
+            break;    
                 
             case "Remove Employee":
                 removeEmployee();
@@ -87,7 +92,7 @@ function viewAll() {
     
 }
 
-function viewAllDept() {
+function viewAllInDept() {
     connection.query("SELECT * FROM DEPARTMENT d, employee e, roles r where d.department_id=r.department_id and r.role_id=e.role_id;", function(err, data){
         if(err) throw err
         console.table(data);
@@ -118,6 +123,34 @@ function addDepartment() {
         })
     })
 }
+
+function addRole() {
+    inquirer.prompt([
+        {
+            type: "input",
+            message: "What is the name of the role?",
+            name: "roleName"
+        },
+        {
+            type: "input",
+            message: "What is this role's salary?",
+            name: "roleSalary"
+        },
+        {
+            type: "list",
+            message: "What is the department ID?",
+            name: "deptId",
+            choices: [1,2,3,4],
+        }
+    ]).then(function(userResponse){
+        connection.query('INSERT INTO roles (title, salary, department_id) VALUES (?,?,?);', [userResponse.roleName, userResponse.roleSalary, userResponse.deptId], function(err, data){
+            if(err) throw err
+            console.log("Department added");
+            getUserInputs();
+        })
+    })
+}
+
 function addEmployee() {
     inquirer.prompt([
         {
