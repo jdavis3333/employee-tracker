@@ -34,7 +34,6 @@ function getUserInputs() {
                 "Add Department",
                 "Add Role",
                 "Add Employee",
-                "Remove Employee",
                 "Update Employee Role",
             ]
         },
@@ -65,25 +64,16 @@ function getUserInputs() {
                     addEmployee();
                     break;
 
-                case "Remove Employee":
-                    removeEmployee();
-                    break;
-
                 case "Update Employee Role":
                     updateEmployeeRole();
                     break;
-
-                case "Update Employee Manager":
-                    updateEmployeeMgr();
-                    break;
-
             }
         })
 }
 
 //create functions depending on user choices
 function viewAll() {
-    connection.query("SELECT * FROM EMPLOYEE", function (err, data) {
+    connection.query("SELECT employee.first_name, employee.last_name, roles.title, roles.salary FROM employee LEFT JOIN roles on employee.id = roles.id;", function (err, data) {
         if (err) throw err
         console.table(data);
         getUserInputs();
