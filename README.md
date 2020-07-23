@@ -82,11 +82,6 @@ inquirer.prompt([
 * [MySQL](https://www.mysql.com/)
 * [Javascript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 
-## Deployed Link
-
-* 
-
-
 ## Authors
 
 * Joe Davis 
@@ -99,8 +94,4 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the MIT License 
-
-## Acknowledgments
-
-This project is licensed under the ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg).
+This project is licensed under the ![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)

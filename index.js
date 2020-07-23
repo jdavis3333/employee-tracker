@@ -203,7 +203,7 @@ function updateEmployeeRole() {
                 type: "list",
                 message: "What department is this updated role in?",
                 name: "department",
-                choices: ["1","2","3","4"]
+                choices: ["1", "2", "3", "4"]
             }
         ]).then(function (answer) {
             connection.query(
@@ -217,8 +217,8 @@ function updateEmployeeRole() {
                     {
                         id: answer.updateRole
                     }
-                ],    
-                    function (err,res) {
+                ],
+                function (err, res) {
                     console.log(answer.title);
                     if (err) throw (err)
                     console.log("Role updated");
@@ -229,5 +229,6 @@ function updateEmployeeRole() {
         })
 
     }
-)}
+    )
+}
 
